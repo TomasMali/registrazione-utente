@@ -1,175 +1,245 @@
-
-    <div class="container">
-
-
-        <div class="row  mb-5">
-            <div class="col text-center ">
-                <h4 >Form Di Registrazione</h4>
-            </div>
-        </div>
+<div class="container">
 
 
-        <div class="row">
-            <div class="col">
+  <div class="row  mb-5">
+    <div class="col text-center ">
+      <h4>Form Di Registrazione</h4>
+    </div>
+  </div>
 
 
-                <ul class="list-group "  >
-                    <li class="list-group-item list-group-item-info text-center active">Register</li>
-                    <li class="list-group-item">
-
-                        <form class="needs-validation" novalidate>
-                            
-
-                              <div class="form-group">
-                                <label for="exampleInputName"> <b>Nome</b> </label>
-                                <div class="input-group input-group-md">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text ">
-                                        <i class="fas fa-user"></i>
-                                      </span>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm"  placeholder="Il tuo nome" required>
-                                </div>
-
-                                <div class="invalid-feedback">Name can't be blank</div>
-                                <div class="valid-feedback">Looks good!</div>
-                                <small *ngIf="false" class="form-text text-muted">Text input example</small>
-                              </div>
-
-
-          
-                            <div class="form-group">
-                              <label for="exampleInputName"> <b>Cognome</b> </label>
-                              <div class="input-group input-group-md">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text ">
-                                    <i class="fas fa-user">
-                                    </i>
-                                  </span>
-                                </div>
-                                <input type="text" class="form-control form-control-sm" placeholder="Il tuo cognome" required>
-                            </div>
-                              <div class="invalid-feedback">Name can't be blank</div>
-                              <div class="valid-feedback">Looks good!</div>
-                              <small *ngIf="false" class="form-text text-muted">Text input example</small>
-                            </div>
+  <div class="row">
+    <div class="col">
 
 
 
-                            <div class="form-group">
-                                <label for="exampleInputName"> <b>Codice Fiscale</b> </label>
-                                <div class="input-group input-group-md">
-                                  <div class="input-group-prepend">
-                                    <span class="input-group-text ">
-                                        <i class="far fa-address-card"></i>
-                                    </span>
-                                  </div>
-                                  <input type="text" class="form-control form-control-sm"  placeholder="Il tuo C.F" required>
-                              </div>
-                                <small *ngIf="false" class="form-text text-muted">Text input example</small>
-                              </div>
+      <div class="card rounded_border_all colorbody">
+        <div class="card-header bg-primary text-center text-white rounded_border_top  ">Register</div>
+        <div class="card-body card_head rounded_border_bottom colorbody p-4">
 
 
-                                    
-                            <div class="form-group">
-                                <label for="exampleInputFriends"><b>Età</b></label>
-                                <div class="input-group input-group-md">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text ">
-                                        <i class="fas fa-info">
-                                        </i>
-                                      </span>
-                                    </div>
-                                    <input type="number" class="form-control form-control-sm"  placeholder="La tua età" required>
-                                </div>
-                                <small *ngIf="false" class="form-text text-muted">Integer input example</small>
-                              </div>
+          <form [formGroup]="form" (submit)="onUserRegistration()" class="needs-validation was-validated" >
 
-                              <div class="form-group">
-                                <label for="exampleInputFriends"><b>Nr. di telefono</b></label>
-                                <div class="input-group input-group-md">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text ">
-                                        <i class="fas fa-phone-square"></i>
-                                      </span>
-                                    </div>
-                                    <input type="tel" class="form-control form-control-sm" placeholder="Numero di telefono" required>
-                                </div>
-                                <small *ngIf="false" class="form-text text-muted">Campo obbligatorio *</small>
-                              </div>
-
-
-                          
-                            <div class="form-group">
-                              <label for="exampleInputEmail"><b>Email</b></label>
-                              <div class="input-group input-group-md">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text ">
-                                    <i class="fa fa-envelope-square">
-                                    </i>
-                                  </span>
-                                </div>
-                                <input type="email" class="form-control form-control-sm"  placeholder="La tua email" autocomplete="email" required>
-                            </div>
-                              <small *ngIf="false" class="form-text text-muted">Campo obbligatorio *</small>
-                            </div>
-
-              
-                            <div class="form-group">
-                              <label for="exampleInputPassword"><b>Nuova password</b></label>
-                              <div class="input-group input-group-md">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text ">
-                                    <i class="fas fa-key">
-                                    </i>
-                                  </span>
-                                </div>
-                                <input type="password" class="form-control form-control-sm"  placeholder="Nuova password" autocomplete="current-password" required>
-                            </div>
-                              <small *ngIf="false" class="form-text text-muted">Campo obbligatorio *</small>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="exampleInputPassword"><b>Ripeti password</b></label>
-                                <div class="input-group input-group-md">
-                                  <div class="input-group-prepend">
-                                    <span class="input-group-text ">
-                                      <i class="fas fa-key">
-                                      </i>
-                                    </span>
-                                  </div>
-                                  <input type="password" class="form-control form-control-sm"  placeholder="Ripeti password" autocomplete="current-password" required>
-                              </div>
-                                <small *ngIf="false" class="form-text text-muted">Riscrivi la stessa password *</small>
-                              </div>
-                                                     
-                          
-                            <button class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Registrami</button>   
-                          </form>
-
-                    </li>
-                    
-                  </ul>
+            <div class="form-group">
+              <label for="exampleInputName"> <b>Nome</b> </label>
+              <div class="input-group input-group-md ">
+                <div class="input-group-prepend ">
+                  <span class="input-group-text  rounded_border_all">
+                    <i class="fas fa-user"></i>
+                  </span>
                 </div>
-
-
-
-             
-    
-
-
-
-
-
-
-
-            <div class="col">
-                <p>Qui ci va la descrizione dopo la registrazione</p>
+                <input type="text" class="form-control rounded_border_all form-control-sm" formControlName="nome"
+                  placeholder="Il tuo nome">
+              </div>
+              <small *ngIf="form.get('nome').invalid && (form.get('nome').dirty || form.get('nome').touched) "
+                class="ml-5 form-text text-danger">Campo obbligatorio *</small>
             </div>
+
+
+
+            <div class="form-group">
+              <label for="exampleInputName"> <b>Cognome</b> </label>
+              <div class="input-group input-group-md">
+                <div class="input-group-prepend">
+                  <span class="input-group-text rounded_border_all">
+                    <i class="fas fa-user">
+                    </i>
+                  </span>
+                </div>
+                <input type="text" class="form-control form-control-sm rounded_border_all" placeholder="Il tuo cognome"
+                  formControlName="cognome" >
+              </div>
+              <small *ngIf="form.get('cognome').invalid && (form.get('cognome').dirty || form.get('cognome').touched)"
+                class="ml-5 form-text text-danger">Campo obbligatorio *</small>
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="exampleInputName"> <b>Codice Fiscale</b> </label>
+              <div class="input-group input-group-md">
+                <div class="input-group-prepend">
+                  <span class="input-group-text rounded_border_all">
+                    <i class="far fa-address-card"></i>
+                  </span>
+                </div>
+                <input type="text" class="form-control form-control-sm rounded_border_all" placeholder="Il tuo C.F" formControlName="cf"
+                  >
+              </div>
+              <small *ngIf="form.get('cf').invalid && (form.get('cf').dirty || form.get('cf').touched)"
+                class="ml-5 form-text text-danger">Campo obbligatorio *</small>
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="exampleInputFriends"><b>Età</b></label>
+              <div class="input-group input-group-md">
+                <div class="input-group-prepend">
+                  <span class="input-group-text rounded_border_all">
+                    <i class="fas fa-info">
+                    </i>
+                  </span>
+                </div>
+                <input type="number" class="form-control form-control-sm rounded_border_all" placeholder="La tua età"
+                  formControlName="eta">
+              </div>
+              <small *ngIf="form.get('eta').invalid && (form.get('eta').dirty || form.get('eta').touched)"
+                class="ml-5 form-text text-danger">Campo obbligatorio *</small>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputFriends"><b>Nr. di telefono</b></label>
+              <div class="input-group input-group-md">
+                <div class="input-group-prepend">
+                  <span class="input-group-text rounded_border_all">
+                    <i class="fas fa-phone-square"></i>
+                  </span>
+                </div>
+                <input type="tel" class="form-control form-control-sm rounded_border_all" placeholder="Numero di telefono"
+                  formControlName="telefono">
+              </div>
+              <small
+                *ngIf="form.get('telefono').invalid && (form.get('telefono').dirty || form.get('telefono').touched)"
+                class="ml-5 form-text text-danger">Campo obbligatorio *</small>
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="exampleInputEmail"><b>Email</b></label>
+              <div class="input-group input-group-md">
+                <div class="input-group-prepend">
+                  <span class="input-group-text rounded_border_all">
+                    <i class="fa fa-envelope-square">
+                    </i>
+                  </span>
+                </div>
+                <input type="email" class="form-control form-control-sm rounded_border_all" placeholder="La tua email" autocomplete="email"
+                  formControlName="email" >
+              </div>
+              <small *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)"
+                class="ml-5 form-text text-danger">Campo obbligatorio *</small>
+            </div>
+
+
+            <div class="form-group">
+              <label for="exampleInputPassword"><b>Nuova password</b></label>
+              <div class="input-group input-group-md">
+                <div class="input-group-prepend">
+                  <span class="input-group-text rounded_border_all">
+                    <i class="fas fa-key">
+                    </i>
+                  </span>
+                </div>
+                <input type="password" class="form-control form-control-sm rounded_border_all" placeholder="Nuova password"
+                  autocomplete="current-password" formControlName="nuovaPassword">
+              </div>
+              <small
+                *ngIf="form.get('nuovaPassword').invalid && (form.get('nuovaPassword').dirty || form.get('nuovaPassword').touched)"
+                class="ml-5 form-text text-danger">Campo obbligatorio *</small>
+            </div>
+
+
+            <div class="form-group">
+              <label for="exampleInputPassword"><b>Ripeti password</b></label>
+              <div class="input-group input-group-md">
+                <div class="input-group-prepend">
+                  <span class="input-group-text rounded_border_all">
+                    <i class="fas fa-key">
+                    </i>
+                  </span>
+                </div>
+                <input type="password" class="form-control form-control-sm rounded_border_all" placeholder="Ripeti password"
+                  autocomplete="current-password" formControlName="password">
+              </div>
+              <small
+                *ngIf="form.get('password').value !==  form.get('nuovaPassword').value && form.get('password').dirty"
+                class="ml-5 form-text text-danger">Password non corrispondente *</small>
+            </div>
+
+            <button *ngIf="!hideButton" class="btn btn-outline-primary rounded_border_all btn-rounded btn-block my-4" type="submit"
+              [disabled]="!form.valid">Registrami</button>
+
+            <div *ngIf="hideButton" class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>Success!</strong> Registrazione andata a buon fine! Adesso puoi effettuare il Login
+              <button class="btn btn-sm btn-primary rounded_border_all" routerLink="/login" > Login </button>
+            </div>
+
+            <div *ngIf="userExsist"  class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>Errore!</strong> Utente già registrato con la e-mail fornita. Inserire un'altra e-mail!
+            </div>
+
+          </form>
+
+
         </div>
 
+      </div>
 
-     
 
     </div>
+
+
+    <div class="col ">
+
+
+      <div class="card rounded_border_all">
+        <div class="card-header bg-primary text-center text-white rounded_border_top">Area Informazioni</div>
+        <div class="card-body colorbody rounded_border_bottom">
+
+
+          <p class="font-italic small p-2">
+            Questa pagina permette la registrazione di un utente. Con la registrazione effettuata verranno informati gli
+            amministratori della richiesta di registrazione , i quali provederano
+            con la generazione e l'assegnazione del proprio codice QR.
+            Dopo la registrazione, nel frattempo sarà possibile effettuare il login con la propria E-mail
+            e la Password fornita. Una volta effettuato il login è possiblie visitare la propria area utente dove verrà
+            mostrato lo stato
+            della registrazione. Solo dopo la conferma di un utente amministratore sarà possibile visualizzare il codice
+            QR nella propria area utente.
+            La notifica dell'assegnazione del codice QR avverrà mediante E-mail fornita nella registrazione.
+          </p>
+
+
+
+
+          <div class="card-deck mt-4">
+            <div class="card bg-light">
+              <div class="card-body ">
+                <strong>
+                  <p class="card-text text-center pb-4">I Dati Della Registrazione</p>
+                </strong>
+
+
+                <h6> <small> <strong>Nome:</strong> {{user?.nome}} </small> </h6>
+                <h6> <small> <strong>Cognome:</strong> {{user?.cognome}} </small> </h6>
+                <h6> <small> <strong>C.F:</strong> {{user?.cf}} </small> </h6>
+                <h6> <small> <strong>Età:</strong> {{user?.eta}} </small> </h6>
+                <h6> <small> <strong>Telefono:</strong> {{user?.telefono}} </small> </h6>
+                <h6> <small> <strong>Email:</strong> {{user?.email}} </small> </h6>
+                <h6> <small> <strong>QR code:</strong> Non ancora disponibile </small> </h6>
+                <h6> <small> <strong>Autorizzato:</strong> In attesa... </small> </h6>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+    </div>
+  </div>
+
+
+
+
+</div>

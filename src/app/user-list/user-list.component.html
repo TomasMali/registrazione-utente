@@ -1,1 +1,136 @@
-<p>user-list works!</p>
+<div class="container">
+
+
+
+
+
+
+
+  <div id="accordion " class="card   text-dark pt-4 body_content">
+
+
+
+    <div class="row">
+      <div class="col col-2"></div>
+      <div class="col col-8">
+        <form>
+          <div class="input-group input-group-sm mb-3  pb-5">
+
+            <input type="text" class="form-control rounded_border_all" placeholder="Cerca un utente">
+          </div>
+        </form>
+      </div>
+      <div class="col col-2"></div>
+    </div>
+
+
+
+
+    <div class="row mb-5">
+      <div class="col col-sm-0 col-0 col-md-1"></div>
+
+
+      <div class="col col-sm-12 col-12 col-md-10">
+
+
+        <div [ngClass]="{'apply_collapse': users.length > 8}">
+
+          <div class="card p-0" *ngFor="let user of users; let i = index">
+
+
+
+            <a class="btn btn-primary  " data-toggle="collapse" href="#List-{{ i }}" aria-expanded="false">
+
+
+              <div class="input-group-prepend">
+                <span class="ml-auto">
+                  {{user.nome}} {{user.cognome}}
+                </span>
+
+                <span class="input-group-text ml-auto">
+                  <i class="fas fa-key">
+                  </i>
+                </span>
+              </div>
+
+            </a>
+
+
+            <div id="List-{{ i }}" class="collapse  ">
+              <div class="card-body">
+
+
+                <div class="row">
+                  <div class="col ">
+                    <img src="{{user?.qrCode}}" alt="" style="width: 125px; height: 125px;">
+
+                  </div>
+                  <div class="col mt-3 ">
+                    <h5> <small> <strong> C.F: </strong> {{user?.cf}} </small> </h5>
+                    <h5> <small> <strong> E-mail: </strong> {{user?.email}} </small> </h5>
+                    <h5> <small> <strong> Telefono: </strong> {{user?.telefono}} </small> </h5>
+                    <h5> <small> <strong> Età: </strong> {{user?.eta}} </small> </h5>
+                  </div>
+
+
+                  <div class="col">
+
+                    <form [formGroup]="form" (change)="onUserAuthorization(user)" >
+                      <div class="form-check">
+                        <input class="form-check-input" [checked]="user?.autorizzato" formControlName="authCheckbox" type="checkbox"  >
+                        <label class="form-check-label" for="defaultCheck1">
+                          Utente autorizzato
+                        </label>
+                      </div>
+
+                    </form>
+
+                    <button class="btn btn-sm btn-danger rounded_border_all btn-rounded   my-3" type="submit"
+                      (click)="onDeleteUser(user?._id)">
+                      Delete user
+                    </button>
+
+
+
+
+
+
+
+
+                  </div>
+
+
+                </div>
+
+
+
+
+
+
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+
+        </div>
+
+
+
+      </div>
+      <div class="col col-sm-0 col-0 col-md-1"></div>
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+</div>

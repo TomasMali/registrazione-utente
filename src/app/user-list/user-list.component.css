@@ -1,0 +1,38 @@
+
+
+.rounded_border_all {
+    border-radius: 18px;
+    border-width: 2px;
+}
+
+
+
+
+
+.anyClass {
+    height:300px;
+    overflow-y: scroll;
+  }
+
+  .div_wrapper {
+    padding: 50px 50px 50px 50px;
+  }
+
+
+h5{
+    font-size: 0.9em;
+}  
+
+
+.apply_collapse {
+    overflow-y: scroll;
+    height:300px;
+  
+}
+
+.body_content{
+background-color: black;
+border-radius: 18px;
+border-width: 5px;
+border-color: white;
+}

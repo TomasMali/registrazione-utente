@@ -1,28 +1,37 @@
+<nav class=" navbar navbar-expand-md navbar-dark bg-dark p-0">
+
+  <a class="navbar-brand ml-md-5 p-4" routerLink="/home">Home</a>
 
 
+  <button class="navbar-toggler mr-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+    <span class="icon-bar top-bar"></span>
+    <span class="icon-bar middle-bar"></span>
+    <span class="icon-bar bottom-bar"></span>	
+  </button>
 
-
-
-<nav class="navbar navbar-expand-lg bg-primary navbar-dark">
-    <ul class="navbar-nav">
-      <li class="nav-item active p-2  ">
-        <a class="nav-link " routerLink="/">Home</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto ">
+      <li class="nav-item mt-1 mt-md-0 ml-md-3   active" *ngIf="userIsAuthenticated">
+        <a class="nav-link pl-5 pt-3 pb-3 p-md-5" routerLink="/myaccount">MyArea</a>
       </li>
-      
-      <li class="nav-item p-2 pl-5">
-        <a class="nav-link " routerLink="/myaccount">My account</a>
+      <li class=" nav-item mt-1 mt-md-0 ml-md-3  active" *ngIf="userIsAuthenticated && userIsAdmin">
+        <a class="nav-link pl-5 pt-3 pb-3  p-md-5" routerLink="/admin">Admin</a>
       </li>
-
+      <li class="nav-item mt-1 mt-md-0  ml-md-3  active" *ngIf="!userIsAuthenticated">
+        <a class="nav-link pl-5 pt-3 pb-3 p-md-5" routerLink="/registrati">Register</a>
+      </li>
+      <li class="nav-item mt-1 ml-3  mt-md-0 ml-md-3 mr-md-5  active" *ngIf="!userIsAuthenticated">
+        <a class="pt-4 pb-4 p-md-5  btn btn-sm btn-link mt-1 button__logout" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item mt-1 ml-3  mt-md-0 ml-md-3 mr-md-5 " *ngIf="userIsAuthenticated">
+        <button class="p-4 p-md-5 btn btn-sm btn-link mt-1 button__logout" (click)="onLogout()">Logout</button>
+      </li>
     </ul>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item nav-item p-2 text-">
-        <a class="nav-link" routerLink="/registrati">Register</a>
-      </li>
+  </div>
 
-      <li class="nav-item p-2">
-        <a class="nav-link" routerLink="/login">Login</a>
-      </li>
-    </ul>
-    
-  </nav>
+</nav>
+
+
+
+
 

@@ -1,0 +1,191 @@
+
+
+
+
+
+#altro {
+    height: 600px;
+    width: 100%;
+    background: url("../../assets/freedom.jpg");
+    color: white;
+}
+
+
+.main-header {
+    width: 100%;
+    background-color: #2ddf5c;
+    padding: 8px 16px;
+   
+}
+
+.main-header > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.main-header__brand {
+    color: #0e4f1f;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 22px;
+
+}
+
+.main-nav {
+    display: inline-block;  
+    text-align: right;
+    width: calc(100% - 165px);
+    vertical-align: middle;
+}
+
+.main-nav__items{
+    margin: 0;
+    padding: 0 ;
+    list-style: none ;
+}
+
+.main-nav__item {
+    display: inline-block;
+    margin: 0 16px;
+}
+
+.main-nav__item a {
+    text-decoration: none;
+    color: #0e4f1f;
+    font-weight: bold;
+padding: 3px 0;
+}
+
+#my-area {
+    display: inline-block;
+    margin: 0 20px;
+    text-decoration: none;
+    color: #0e4f1f;
+    font-weight: bold;
+padding: 3px 0;
+}
+
+#my-area:hover,
+#my-area:active{
+    color: white;
+border-bottom: 3px solid white;
+} 
+
+
+
+
+.main-nav__item a:hover,
+.main-nav__item a:active  {
+color: white;
+border-bottom: 3px solid white;
+}
+
+
+
+
+p::first-letter{
+    color: tomato;
+    font-size: 22px;
+}
+
+.main-nav__item-cta a{
+   color: white;
+   background-color: #ff1b68;
+   padding: 8px 12px;
+   border-radius: 8px;
+}
+
+.main-nav__item-cta a:hover,
+.main-nav__item-cta a:active{
+    color: #ff1b68;
+    background: white;
+    border: none;
+}
+
+
+/*
+NAVBAR
+*/
+.bg-dark {
+    background-color: #0e4071!important;
+}
+
+
+.button__logout{
+    color:  springgreen;
+}
+
+.button__logout:hover,
+.button__logout:active{
+    color: #ff1b68;
+}
+
+.navbar-brand:hover{
+    color: springgreen;
+}
+
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:active  {
+    color: springgreen;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 5px solid springgreen;
+    background-color: brown;
+}
+/*
+NAVBAR
+*/
+
+
+
+
+/*
+ICON MENU
+*/
+
+
+  .icon-bar {
+	width: 22px; 
+	height: 2px;
+	background-color: springgreen;
+	display: block;
+	transition: all 0.2s;
+	margin-top: 4px
+}
+ 
+.navbar-toggler {
+  border: none;
+  background: transparent !important;
+}
+
+
+.navbar-toggler .top-bar {
+    transform: rotate(45deg);
+    transform-origin: 10% 10%;
+  }
+   
+  .navbar-toggler .middle-bar {
+    opacity: 0;
+  }
+   
+  .navbar-toggler .bottom-bar {
+    transform: rotate(-45deg);
+    transform-origin: 10% 90%;
+  }
+   
+  .navbar-toggler.collapsed .top-bar {
+    transform: rotate(0);
+  }
+   
+  .navbar-toggler.collapsed .middle-bar {
+    opacity: 1;
+  }
+   
+  .navbar-toggler.collapsed .bottom-bar {
+    transform: rotate(0);
+  }
+
+  /*
+/ICON MENU
+*/

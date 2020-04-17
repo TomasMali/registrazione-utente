@@ -7,8 +7,12 @@ import { HomeComponent } from './home/home.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { LoginComponent } from './login/login.component';
+import { AuthInterceptor } from './login/auth-interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { MyaccountComponent } from './myaccount/myaccount.component';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -23,8 +27,14 @@ import { MyaccountComponent } from './myaccount/myaccount.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

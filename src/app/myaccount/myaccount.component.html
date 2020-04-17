@@ -1,1 +1,49 @@
-<p>myaccount works!</p>
+<div class="container ">
+
+
+  <div class="card ">
+    <div class="card-header  bg-primary text-center text-white">Informazioni sul mio account</div>
+    <div class="card-body colorbody">
+
+      <div class="card-deck mt-4">
+        <div class="card bg-light">
+          <div class="card-body ">
+
+            <strong>
+              <p class="card-text text-center pb-4">I Dati Della Registrazione</p>
+            </strong>
+
+            <div class="row p-3">
+              <div class="col pl-5">
+
+                <h5> <small> <strong>Nome:</strong> {{user?.nome}} </small> </h5>
+                <h5> <small> <strong>Cognome:</strong> {{user?.cognome}} </small> </h5>
+                <h5> <small> <strong>C.F:</strong> {{user?.cf}} </small> </h5>
+                <h5> <small> <strong>Età:</strong> {{user?.eta}} </small> </h5>
+                <h5> <small> <strong>Telefono:</strong> {{user?.telefono}} </small> </h5>
+                <h5> <small> <strong>Email:</strong> {{user?.email}} </small> </h5>
+                <h5> <small> <strong>QR code:</strong> Non ancora disponibile </small> </h5>
+                <h5> <small> <strong>Autorizzato:</strong> In attesa... </small> </h5>
+
+              </div>
+              <div *ngIf="user?.autorizzato" class="col">
+                <img src="{{user?.qrCode}}" alt="" style="width: 150px; height: 150px;">
+              </div>
+
+              <div class="col">
+           
+              </div>
+
+              <div class="col">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="card-footer text-center">{{ today }}</div>
+  </div>
+
+</div>
