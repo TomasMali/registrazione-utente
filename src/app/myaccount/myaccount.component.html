@@ -1,49 +1,53 @@
-<div class="container ">
 
 
-  <div class="card ">
-    <div class="card-header  bg-primary text-center text-white">Informazioni sul mio account</div>
-    <div class="card-body colorbody">
 
-      <div class="card-deck mt-4">
-        <div class="card bg-light">
-          <div class="card-body ">
 
-            <strong>
-              <p class="card-text text-center pb-4">I Dati Della Registrazione</p>
-            </strong>
 
-            <div class="row p-3">
-              <div class="col pl-5">
 
-                <h5> <small> <strong>Nome:</strong> {{user?.nome}} </small> </h5>
-                <h5> <small> <strong>Cognome:</strong> {{user?.cognome}} </small> </h5>
-                <h5> <small> <strong>C.F:</strong> {{user?.cf}} </small> </h5>
-                <h5> <small> <strong>Età:</strong> {{user?.eta}} </small> </h5>
-                <h5> <small> <strong>Telefono:</strong> {{user?.telefono}} </small> </h5>
-                <h5> <small> <strong>Email:</strong> {{user?.email}} </small> </h5>
-                <h5> <small> <strong>QR code:</strong> Non ancora disponibile </small> </h5>
-                <h5> <small> <strong>Autorizzato:</strong> In attesa... </small> </h5>
 
-              </div>
-              <div *ngIf="user?.autorizzato" class="col">
-                <img src="{{user?.qrCode}}" alt="" style="width: 150px; height: 150px;">
-              </div>
 
-              <div class="col">
-           
-              </div>
 
-              <div class="col">
-              </div>
-            </div>
+<div class="container  mt-2 mt-md-5">
 
-          </div>
-        </div>
-      </div>
 
-    </div>
-    <div class="card-footer text-center">{{ today }}</div>
+
+<h6 class="text-center color_title mt-0 mb-0">
+  My info
+</h6>
+
+
+
+<div class="row align-items-center p-3 mt-md-5">
+
+
+
+  <div class="col " *ngIf="user?.autorizzato">
+    <img class=" ml-md-auto  mx-auto d-block" src="{{user?.qrCode}}" alt="" style="width: 130px; height: 130px;">
   </div>
 
+
+  <div class="col mt-4">
+
+    <div class="h5__content">
+      <h5 class="ml-5"> <strong>Nome: </strong> {{user?.nome}} </h5>
+      <h5 class="ml-5"> <strong>Cognome: </strong> {{user?.cognome}}</h5>
+      <h5 class="ml-5"> <strong>C.F: </strong> {{user?.cf}} </h5>
+      <h5 class="ml-5"> <strong>Età: </strong> {{user?.eta}} </h5>
+      <h5 class="ml-5"> <strong>Telefono: </strong> {{user?.telefono}} </h5>
+      <h5 class="ml-5"> <strong>Email: </strong> {{user?.email}} </h5>
+      <h5 class="ml-5"> <strong>QR code: </strong> {{user?.autorizzato ? "Presente" : "Non ancora disponibile"}}  </h5>
+      <h5 class="ml-5"> <strong>Autorizzato: </strong> {{user?.autorizzato ? "Si" : "In attesa..."}}  </h5>
+    </div>
+  </div>
+
+
+
+
 </div>
+
+
+
+
+</div>
+
+

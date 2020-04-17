@@ -1,21 +1,13 @@
 
 
-<div class="row">
-  <div class="col mt-4 pt-4">
-  </div>
-</div>
 
 
+<div class="row login mx-md-auto ">
+ 
+ 
+  <div class="col p-5 mt-4 mt-md-5">
 
 
-
-
-<div class="row ">
-  <div class="col">
-  </div>
-
-
-  <div class="col p-5 m-5">
   
     <div class="card rounded_border_all">
       <div class="card-header  text-center text-white rounded_border_top header_color">
@@ -26,7 +18,7 @@
         <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control form-control-sm rounded_border_all" aria-describedby="emailHelp"
+            <input type="email" class="form-control rounded_border_all" aria-describedby="emailHelp"
               placeholder="Enter email" name="email" #emailInput="ngModel" ngModel>
           </div>
           <div class="form-group">
@@ -36,17 +28,14 @@
               <small *ngIf="!emailOrPassword " id="emailHelp" class="form-text text-danger">Email o Password errati!</small>
           </div>
           <br>
-          <button type="submit" class="btn btn-sm  rounded_border_all button_coloro btn-block">Login</button>
+          <button type="submit" class="btn btn-sm p-2 button_hover rounded_border_all button_coloro btn-block">Login</button>
         </form>
 
       </div>
     
 
+    </div>
   </div>
-</div>
-
-  <div class="col"></div>
-</div>
 
 
 
@@ -54,9 +43,3 @@
 
 
 
-
-
-<div class="row">
-  <div class="col m-5 p-5 ">
-  </div>
-</div>

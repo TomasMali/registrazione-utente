@@ -8,6 +8,9 @@ import { UserService } from './user.service';
 })
 export class AppComponent implements OnInit {
   title = 'registrazione-utenti';
+
+data = new Date()
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {

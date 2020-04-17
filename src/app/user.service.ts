@@ -14,7 +14,7 @@ export class UserService {
       throw new Error("Method not implemented.");
   }
 
-
+urlUser = "http://192.168.1.119:3000/user/"
 
   private users: User[] = []
   private usersUpdated = new Subject<User[]>()
@@ -79,7 +79,7 @@ export class UserService {
 
   addUser(user: User) {
 
-    this.http.post<any>("http://localhost:3000/user/signup", user)
+    this.http.post<any>(this.urlUser + "signup", user)
       .subscribe(resultData => {
         console.log("Broswer ******* " + resultData.result._id)
 
@@ -121,7 +121,7 @@ export class UserService {
 
 
   getOneUser(email: string) {
-    this.http.get<{ message: string, user: User }>("http://localhost:3000/user/findme/" + email)
+    this.http.get<{ message: string, user: User }>(this.urlUser + "findme/" + email)
 
       .subscribe(resultData => {
         console.log("Broswer ******* " + JSON.stringify(resultData.user))
@@ -141,7 +141,7 @@ export class UserService {
 
 
   getUsers() {
-    this.http.get<{ message: string, posts: any }>("http://localhost:3000/user")
+    this.http.get<{ message: string, posts: any }>(this.urlUser)
       .pipe(map((userData) => {
         return userData.posts.map(user => {
           console.log("Telebingo:    " + user.nome)
@@ -178,7 +178,7 @@ export class UserService {
    * @param email 
    */
   deleteUser(userId: string) {
-    this.http.delete('http://localhost:3000/user/' + userId)
+    this.http.delete(this.urlUser + userId)
       .subscribe(() => {
 
         const updatedUsers = this.users.filter(user => user._id !== userId)
@@ -192,7 +192,7 @@ export class UserService {
   userUpdateAuth(user: User){
 
     
-    this.http.put("http://localhost:3000/user/puti", user)
+    this.http.put(this.urlUser + "puti", user)
         .subscribe(response => {
             const updateUsers = [...this.users]
             const oldUsersIndex = updateUsers.findIndex(u => u._id === user._id)
@@ -221,7 +221,7 @@ export class UserService {
     const authData: AuthData = {
       email: email, password: password
     }
-    this.http.post<{ token: string, expiresIn: number }>("http://localhost:3000/user/login", authData)
+    this.http.post<{ token: string, expiresIn: number }>(this.urlUser +"login", authData)
       .subscribe(response => {
         if (response.token) {
           const expireInDuration = response.expiresIn

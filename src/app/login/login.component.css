@@ -1,5 +1,13 @@
 
 
+   @media (min-width: 390px) {
+    .login {
+       width: 440px;
+       margin-top: 200px;
+    }
+}
+
+
 
 .rounded_border_top {
     border-top-left-radius: 12px;
@@ -24,3 +32,14 @@
 .header_color{
     background-color: steelblue;
 }
+
+
+
+.button_hover:hover,
+.button_hover:active{
+    color: white;
+    background: #0e4071;
+    border: none;
+}
+
+
