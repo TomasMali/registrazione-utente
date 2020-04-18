@@ -203,6 +203,9 @@ urlUser = "http://192.168.1.119:3000/user/"
             this.currentUser = user
             var cloneUser: User = { ...this.currentUser }
             this.userUpdated.next(cloneUser)
+            //
+this.getUsers()
+
            
         })
 

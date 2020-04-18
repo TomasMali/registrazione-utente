@@ -20,28 +20,45 @@
 
       <div [ngClass]="{'apply_collapse': users.length > 8}">
 
-        <div class="card p-0" *ngFor="let user of users; let i = index">
+        <div class="card p-0 " *ngFor="let user of users; let i = index">
 
 
 
-          <a class="btn" data-toggle="collapse" href="#List-{{ i }}" aria-expanded="false"  [ngClass]="{
+
+
+          <a class="p-2  " data-toggle="collapse" href="#List-{{ i }}" aria-expanded="false"  [ngClass]="{
             'colore_header': user.autorizzato,
-            'colore_pending': !user.autorizzato
-        }"     >
-
-
-            <div class="input-group-prepend "      [ngClass]="{
-              'colore_header': user.autorizzato,
-              'colore_pending': !user.autorizzato
-          }"   >
-              <span class="mx-auto ">
-             {{user.nome}} {{user.cognome}} 
-              </span>
-
+            'colore_pending': !user.autorizzato  }" >
         
+
+
+             <div class="row">
+              <div class="col col-10 col-md-11 text-center pl-5">
+                {{user.nome}} {{user.cognome}} 
+              </div>
+              <div class="col col-2 col-md-1 ml-0  pl-0 ">
+                <span class="input-group-text py-1 " *ngIf="!user?.autorizzato">
+                  <i class="fas fa-key mx-auto  ">
+                  </i>
+                </span>
+              </div>
             </div>
 
+
           </a>
+
+
+        
+     
+
+
+
+        
+
+
+       
+
+        
 
 
           <div id="List-{{ i }}" class="collapse  ">

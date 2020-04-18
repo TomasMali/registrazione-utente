@@ -76,6 +76,7 @@ const transporter = nodemailer.createTransport({
 
 router.get('',CheckAuth, (req, res, next) => {
     User.find()
+        .sort('autorizzato')
         .then(documents => {
 
             //  console.log("Documenti \n" + documents)

@@ -26,7 +26,8 @@ h5{
 
 .apply_collapse {
     overflow-y: scroll;
-    height:300px;
+    overflow-x: hidden;
+    height:340px;
   
 }
 
@@ -51,12 +52,22 @@ border-color: red;
 .colore_header{
   background-color: #007bff;
   color: white;
+
+  background-color: #527aa8;
+  color: white;
 }
 
 
 .colore_pending{
-  background-color: #5a6c80;
+
+
+  background-color: deeppink;
   color: white;
+
+  background-color: #527aa8;
+  color: white;
+
+ 
 }
 
 
@@ -64,6 +75,12 @@ border-color: red;
   background-color: deeppink;
   color: white;
 }
+
+
+
+
+
+
 
 
 
