@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.form.reset()
         }
         else {
-          this.router.navigate(["/myaccount"])
+          this.router.navigate(["/admin"])
         }
 
 

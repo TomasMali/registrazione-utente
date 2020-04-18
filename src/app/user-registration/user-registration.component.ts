@@ -116,7 +116,8 @@ export class UserRegistrationComponent implements OnInit, OnDestroy {
       password: formValue.password,
       qrCode: null,
       admin: false,
-      autorizzato: false
+      autorizzato: false,
+      arrivato: false
     }
 
     this.userService.addUser(user)

@@ -12,5 +12,6 @@ export interface User {
     qrCode: string;
     admin: boolean;
     autorizzato: boolean;
+    arrivato: boolean;
 
 }

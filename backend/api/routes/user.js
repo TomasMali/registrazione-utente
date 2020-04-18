@@ -9,39 +9,59 @@ const router = express.Router()
 const CheckAuth = require("../middleware/check-auth")
 // Nodemailer
 const nodemailer = require('nodemailer')
-const sendGridTransport = require('nodemailer-sendgrid-transport')
+//const sendGridTransport = require('nodemailer-sendgrid-transport')
 
 const QRCode = require('qrcode')
 
 
 
 
+/**
+ * Aggiorna il campo autorizzato e manda la mail all'utente
+ */
+router.put("/puti", CheckAuth, (req, res, next) => {
 
-router.put("/puti" ,CheckAuth,  (req, res, next) => {
-  
     const user_ = req.body
 
-    User.updateOne({ _id: user_._id }, { $set: { "autorizzato" : user_.autorizzato } })
-        .then(result => {
+    if (user_.autorizzato !== null) {
 
-const code = '<img src="' + user_.qrCode + '" alt="" style="width: 125px; height: 125px;">'
 
-            if(user_.autorizzato){
-            transporter.sendMail({
-                to: user_.email,
-                from: "megatoys92@gmail.com",
-                subject: "La tua richiesta di registrazione è stata approvata. ",
-                html: '<h1>  La tua richiesta di registrazione è stata approvata. \n Adesso troverai il tuo codice QR anche nella tua area personale' + '</h1> <br>' +
-                code
+        User.updateOne({ _id: user_._id }, { $set: { "autorizzato": user_.autorizzato } })
+            .then(result => {
+
+                const code = '<img src="' + user_.qrCode + '" alt="" style="width: 125px; height: 125px;">'
+
+                if (user_.autorizzato) {
+                    transporter.sendMail({
+                        to: user_.email,
+                        from: "megatoys92@gmail.com",
+                        subject: "La tua richiesta di registrazione è stata approvata. ",
+                        html: '<h1>  La tua richiesta di registrazione è stata approvata. \n Adesso troverai il tuo codice QR anche nella tua area personale' + '</h1> <br>' +
+                            code
+                    })
+                }
+
+                res.status(200).json({ message: 'Update successful' })
             })
-        }
-          
-            res.status(200).json({message: 'Update successful'})
-        })
-       
+    }
+    else {
+        User.updateOne({ _id: user_._id }, { $set: { "arrivato": user_.arrivato } })
+            .then(result => {
+                res.status(200).json({ message: 'Update successful' })
+            })
+    }
+
+
+
 })
 
 
+
+
+
+/**
+ * Cancella un utente
+ */
 router.delete('/:id', CheckAuth, (req, res, next) => {
     User.deleteOne({ _id: req.params.id }).then(result => {
         console.log(result)
@@ -73,8 +93,10 @@ const transporter = nodemailer.createTransport({
 
 
 
-
-router.get('',CheckAuth, (req, res, next) => {
+/**
+ * Get all the users
+ */
+router.get('',  (req, res, next) => {
     User.find()
         .sort('autorizzato')
         .then(documents => {
@@ -88,6 +110,10 @@ router.get('',CheckAuth, (req, res, next) => {
 })
 
 
+
+/**
+ * Get only one user based on the email
+ */
 router.get('/findme/:email', CheckAuth, (req, res, next) => {
 
     User.findOne({ email: req.params.email })
@@ -134,7 +160,8 @@ router.post("/signup", (req, res, next) => {
                     password: hash,
                     qrCode: url,
                     admin: user_.admin,
-                    autorizzato: user_.autorizzato
+                    autorizzato: user_.autorizzato,
+                    arrivato: false
                 })
 
                 user.save()

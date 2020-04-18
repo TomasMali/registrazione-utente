@@ -9,56 +9,94 @@
     <div class="col col-sm-12 col-12 col-md-10">
 
       <div class="search">
+
         <form>
           <div class="input-group input-group-sm p-4">
             <input type="text" class="form-control rounded_border_all" placeholder="Cerca un utente">
           </div>
         </form>
 
+      
+
+          <div class="row  ">
+      
+
+        <div class="col col-1 col-md-4"></div>
+
+            <div class="col ">
+       
+            
+                <div class="form-check-inline">
+                  <label class="form-check-label" for="radio1">
+                    <input type="radio" class="form-check-input with-gap" id="1"  name="1"  [value]="0" [(ngModel)]="flag"
+                  (click)="onCheckBoxSearPending()" >Pending
+                  </label>
+                </div>
+                <div class="form-check-inline">
+                  <label class="form-check-label" for="radio2">
+                    <input type="radio" class="form-check-input with-gap" id="2" name="2"  [value]="1" [(ngModel)]="flag"
+                    (click)="onCheckBoxSearchAutorizzati()"  >Autorizzati
+                  </label>
+                </div>
+                <div class="form-check-inline">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input with-gap" id="3" name="3"   [value]="2" [(ngModel)]="flag"
+                    (click)="onCheckBoxSearchArrivati()"  >Arrivati
+                  </label>
+                </div>
+               
+            
+
+
+            </div>
+
+ 
+
+         
+          </div>
+
+      
+
+
+  
+
+        
+
+     
+
       </div>
 
 
       <div [ngClass]="{'apply_collapse': users.length > 8}">
 
-        <div class="card p-0 " *ngFor="let user of users; let i = index">
+        <div class="card p-0 " *ngFor="let user of onFilterUser(); let i = index">
 
 
-
-
-
-          <a class="p-2  " data-toggle="collapse" href="#List-{{ i }}" aria-expanded="false"  [ngClass]="{
-            'colore_header': user.autorizzato,
-            'colore_pending': !user.autorizzato  }" >
-        
-
+          <a class="p-2  colore_header" data-toggle="collapse" href="#List-{{ i }}" aria-expanded="false" >
 
              <div class="row">
               <div class="col col-10 col-md-11 text-center pl-5">
                 {{user.nome}} {{user.cognome}} 
               </div>
               <div class="col col-2 col-md-1 ml-0  pl-0 ">
-                <span class="input-group-text py-1 " *ngIf="!user?.autorizzato">
-                  <i class="fas fa-key mx-auto  ">
+                <!-- Pending -->
+                <span class="input-group-text py-1 " *ngIf="!user?.autorizzato && !user?.arrivato">
+                  <i class="fas fa-lock mx-auto  ">
+                  </i>
+                </span>
+                 <!-- Non arrivato -->
+                <span class="input-group-text py-1 " *ngIf="user?.autorizzato && !user?.arrivato">
+                  <i class="fas fa-barcode mx-auto  ">
+                  </i>
+                </span>
+                   <!-- Arrivato -->
+                <span class="input-group-text py-1 " *ngIf="user?.autorizzato && user?.arrivato">
+                  <i class="fas fa-check mx-auto  ">
                   </i>
                 </span>
               </div>
             </div>
-
-
           </a>
-
-
-        
-     
-
-
-
-        
-
-
-       
-
-        
 
 
           <div id="List-{{ i }}" class="collapse  ">
@@ -88,7 +126,18 @@
                         Utente autorizzato
                       </label>
                     </div>
+                  </form>
 
+
+
+                  <form [formGroup]="formArrived" (change)="onUserArrived(user)">
+                    <div class="form-check" *ngIf="user?.autorizzato">
+                      <input class="form-check-input"  [checked]="user?.arrivato" formControlName="arrivedCheckbox"
+                        type="checkbox">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Arrivato
+                      </label>
+                    </div>
                   </form>
 
                   <button class="btn btn-sm btn-danger rounded_border_all btn-rounded   my-3" type="submit"

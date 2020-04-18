@@ -11,10 +11,10 @@ import { JsonPipe } from '@angular/common';
 })
 export class UserService {
   map(arg0: (auth: any) => boolean) {
-      throw new Error("Method not implemented.");
+    throw new Error("Method not implemented.");
   }
 
-urlUser = "http://192.168.1.119:3000/user/"
+  urlUser = "http://192.168.1.119:3000/user/"
 
   private users: User[] = []
   private usersUpdated = new Subject<User[]>()
@@ -94,7 +94,8 @@ urlUser = "http://192.168.1.119:3000/user/"
           password: resultData.result.password,
           qrCode: resultData.result.qrCode,
           admin: resultData.result.admin,
-          autorizzato: resultData.result.autorizzato
+          autorizzato: resultData.result.autorizzato,
+          arrivato: resultData.arrivato
         }
 
         this.users.push(user_)
@@ -156,7 +157,8 @@ urlUser = "http://192.168.1.119:3000/user/"
             password: null,
             qrCode: user.qrCode,
             admin: user.admin,
-            autorizzato: user.autorizzato
+            autorizzato: user.autorizzato,
+            arrivato: user.arrivato
           }
         })
       }))
@@ -189,25 +191,21 @@ urlUser = "http://192.168.1.119:3000/user/"
       })
   }
 
-  userUpdateAuth(user: User){
-
-    
+  userUpdateAuth(user: User) {
     this.http.put(this.urlUser + "puti", user)
-        .subscribe(response => {
-            const updateUsers = [...this.users]
-            const oldUsersIndex = updateUsers.findIndex(u => u._id === user._id)
-            updateUsers[oldUsersIndex] = user
-            this.users = updateUsers
-            this.usersUpdated.next([...this.users])
-            //
-            this.currentUser = user
-            var cloneUser: User = { ...this.currentUser }
-            this.userUpdated.next(cloneUser)
-            //
-this.getUsers()
-
-           
-        })
+      .subscribe(response => {
+        const updateUsers = [...this.users]
+        const oldUsersIndex = updateUsers.findIndex(u => u._id === user._id)
+        updateUsers[oldUsersIndex] = user
+        this.users = updateUsers
+        this.usersUpdated.next([...this.users])
+        //
+        this.currentUser = user
+        var cloneUser: User = { ...this.currentUser }
+        this.userUpdated.next(cloneUser)
+        //
+        this.getUsers()
+      })
 
   }
 
@@ -224,7 +222,7 @@ this.getUsers()
     const authData: AuthData = {
       email: email, password: password
     }
-    this.http.post<{ token: string, expiresIn: number }>(this.urlUser +"login", authData)
+    this.http.post<{ token: string, expiresIn: number }>(this.urlUser + "login", authData)
       .subscribe(response => {
         if (response.token) {
           const expireInDuration = response.expiresIn

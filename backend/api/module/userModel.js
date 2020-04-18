@@ -14,7 +14,8 @@ email: { type: String, required:true, unique: true},
 password:{ type: String, required:true},
 qrCode: { type: String, required:false},
 admin: { type: Boolean, required:false},
-autorizzato: { type: Boolean, required:false}
+autorizzato: { type: Boolean, required:false},
+arrivato: { type: Boolean, required:false}
 });
 
 userSchema.plugin(uniqueValidator)

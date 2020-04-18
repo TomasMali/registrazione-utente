@@ -36,7 +36,7 @@ export class AuthGuardA implements CanActivate, OnInit {
                 if (e.admin) {
                     return true;
                 } else {
-                    this.router.navigate(["/home"])
+                    this.router.navigate(["/myaccount"])
                     return false
                 }
             })
