@@ -12,12 +12,14 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
   form: FormGroup
   formArrived: FormGroup
+  formSearch: FormGroup
   formCheckSearch: FormGroup
   users: User[] = []
   private userSub: Subscription
   today = new Date()
 
   flag: any;
+  search: string = ""
 
   //
   pending: boolean = false;
@@ -25,21 +27,23 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
   arrivati: boolean = false
 
 
-  condition: string= "all"
+  condition: string = "all"
 
-  constructor(public userService: UserService, private cdRef:ChangeDetectorRef) { 
-    
+  constructor(public userService: UserService, private cdRef: ChangeDetectorRef) {
+
   }
 
-  ngAfterViewChecked()
-  {
-    
+  ngAfterViewChecked() {
+
     this.cdRef.detectChanges();
   }
 
   ngOnInit() {
 
-    console.log("Ciao   " + this.flag)
+
+
+    if (this.search == "")
+      this.condition = "all"
 
     this.form = new FormGroup({
       'authCheckbox': new FormControl(null, {
@@ -54,7 +58,14 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
       })
     })
 
+    /*
+    this.formSearch = new FormGroup({
+      'searchControl': new FormControl(null, {
+        validators: [Validators.required]
+      })
+    })
 
+*/
 
 
     // Charges all the user
@@ -67,56 +78,84 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
 
-  onCheckBoxSearPending(){
-console.log("Pending")
-this.condition = "pending"
+  onCheckBoxSearPending() {
+    this.condition = "pending"
+    this.search = ""
   }
-  onCheckBoxSearchAutorizzati(){
-    console.log("Autorizzati")
+
+  onCheckBoxSearchAutorizzati() {
     this.condition = "autorizzati"
-      }
-      onCheckBoxSearchArrivati(){
-        console.log("Arrivati")
-        this.condition = "arrivati"
-          }
-            
+    this.search = ""
+  }
+
+  onCheckBoxSearchArrivati() {
+    this.condition = "arrivati"
+    this.search = ""
+  }
+
+  onCheckBoxSearAll() {
+    this.condition = "all"
+    this.search = ""
+  }
+
+
+  onUserSearch(event) {
+
+    if (event.key === "") {
+      this.condition = "all"
+      this.search = ""
+    }
+
+    this.condition = this.search
+
+  }
 
 
 
 
-onFilterUser(){
 
 
 
-
-if(this.condition === "all")
-return this.users
+  onFilterUser() {
 
 
 
+    if (this.condition !== "all" && this.condition !== "pending"
+      && this.condition !== "autorizzati" && this.condition !== "arrivati" && this.search !== "") {
+      return this.users.filter(u => {
+        return u.nome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.nome.toLowerCase().startsWith(this.search.trim().toLowerCase())
+          || u.cognome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.cognome.toLowerCase().startsWith(this.search.trim().toLowerCase())
+      })
+    }
 
-if(this.condition === "pending"){
-  return this.users.filter(x => {
-    return !x.autorizzato ;
-  })
-}
 
-if(this.condition === "autorizzati"){
-  return this.users.filter(x => {
-    return x.autorizzato && !x.arrivato;
-  })
-}
-
-if(this.condition === "arrivati"){
-  return this.users.filter(x => {
-    return x.autorizzato && x.arrivato;
-  })
-}
+    if (this.condition === "all" || (this.condition !== "pending"
+      && this.condition !== "autorizzati"
+      && this.condition !== "arrivati"))
+      return this.users
 
 
 
+    if (this.condition === "pending") {
+      return this.users.filter(x => {
+        return !x.autorizzato;
+      })
+    }
 
-}
+    if (this.condition === "autorizzati") {
+      return this.users.filter(x => {
+        return x.autorizzato && !x.arrivato;
+      })
+    }
+
+    if (this.condition === "arrivati") {
+      return this.users.filter(x => {
+        return x.autorizzato && x.arrivato;
+      })
+    }
+
+
+  }
 
 
 
@@ -132,7 +171,7 @@ if(this.condition === "arrivati"){
 
     user.autorizzato = this.form.value.authCheckbox
     this.userService.userUpdateAuth(user)
-    
+
 
     // this.form.value.authCheckbox = true
   }
@@ -151,7 +190,6 @@ if(this.condition === "arrivati"){
 
 
   onDeleteUser(_id: string) {
-    console.log("#####Email: " + _id)
     this.userService.deleteUser(_id)
   }
 

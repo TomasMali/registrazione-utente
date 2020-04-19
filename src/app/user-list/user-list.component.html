@@ -10,11 +10,13 @@
 
       <div class="search">
 
-        <form>
+      
           <div class="input-group input-group-sm p-4">
-            <input type="text" class="form-control rounded_border_all" placeholder="Cerca un utente">
+            <input type="text" (keypress)="onUserSearch($event)" class="form-control rounded_border_all "
+             placeholder="Cerca un utente"[(ngModel)]="search" >
           </div>
-        </form>
+        
+
 
       
 
@@ -23,22 +25,29 @@
 
         <div class="col col-1 col-md-4"></div>
 
-            <div class="col ">
+            <div class="col px-0 mx-0">
+
+              <div class="form-check-inline">
+                <label class="form-check-label" for="radio4">
+                  <input type="radio" class="form-check-input with-gap" id="4"  name="4"  [value]="3" [(ngModel)]="flag"
+                (click)="onCheckBoxSearAll()"  >All
+                </label>
+              </div>
        
             
                 <div class="form-check-inline">
                   <label class="form-check-label" for="radio1">
-                    <input type="radio" class="form-check-input with-gap" id="1"  name="1"  [value]="0" [(ngModel)]="flag"
+                    <input type="radio" class="form-check-input with-gap" id="1"  name="1" [value]="0" [(ngModel)]="flag"
                   (click)="onCheckBoxSearPending()" >Pending
                   </label>
                 </div>
                 <div class="form-check-inline">
                   <label class="form-check-label" for="radio2">
                     <input type="radio" class="form-check-input with-gap" id="2" name="2"  [value]="1" [(ngModel)]="flag"
-                    (click)="onCheckBoxSearchAutorizzati()"  >Autorizzati
+                    (click)="onCheckBoxSearchAutorizzati()"  >Autoriz
                   </label>
                 </div>
-                <div class="form-check-inline">
+                <div class="form-check-inline"  for="radio3" >
                   <label class="form-check-label">
                     <input type="radio" class="form-check-input with-gap" id="3" name="3"   [value]="2" [(ngModel)]="flag"
                     (click)="onCheckBoxSearchArrivati()"  >Arrivati
