@@ -22,8 +22,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authListenerSubs = this.userService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
 
-        console.log(" *  **********  " + isAuthenticated)
-
         this.emailOrPassword = isAuthenticated
 
         if (!this.emailOrPassword) {
@@ -45,7 +43,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onLogin(form: NgForm) {
     this.form = form
-    console.log(form)
     this.userService.login(form.value.email, form.value.password)
   }
 

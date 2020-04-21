@@ -3,6 +3,7 @@ import { User } from '../user-registration/user.model';
 import { Subscription } from 'rxjs';
 import { UserService } from '../user.service';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -18,28 +19,23 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
   private userSub: Subscription
   today = new Date()
 
-  flag: any;
+  // flag: any;
   search: string = ""
-
-  //
-  pending: boolean = false;
-  autorizzati: boolean = false
-  arrivati: boolean = false
-
-
   condition: string = "all"
+  userId: string = ""
 
-  constructor(public userService: UserService, private cdRef: ChangeDetectorRef) {
-
+  constructor(public userService: UserService, private cdRef: ChangeDetectorRef, public route: ActivatedRoute, public router: Router) {
   }
 
   ngAfterViewChecked() {
-
     this.cdRef.detectChanges();
   }
 
   ngOnInit() {
 
+    if (this.route.snapshot.params['id'] !== undefined) {
+      this.userId = this.route.snapshot.params['id']
+    }
 
 
     if (this.search == "")
@@ -58,19 +54,8 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
       })
     })
 
-    /*
-    this.formSearch = new FormGroup({
-      'searchControl': new FormControl(null, {
-        validators: [Validators.required]
-      })
-    })
-
-*/
-
-
     // Charges all the user
     this.userService.getUsers()
-    // In every user added from userService it updates the User[] array 
     this.userSub = this.userService.getUsersUpdateListener()
       .subscribe((users: User[]) => {
         this.users = users
@@ -80,61 +65,69 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   onCheckBoxSearPending() {
     this.condition = "pending"
-    this.search = ""
   }
 
   onCheckBoxSearchAutorizzati() {
     this.condition = "autorizzati"
-    this.search = ""
   }
 
   onCheckBoxSearchArrivati() {
     this.condition = "arrivati"
-    this.search = ""
   }
 
   onCheckBoxSearAll() {
     this.condition = "all"
-    this.search = ""
   }
 
 
-  onUserSearch(event) {
-
-    if (event.key === "") {
-      this.condition = "all"
-      this.search = ""
-    }
-
-    this.condition = this.search
-
-  }
-
-
-
-
-
-
-
+/**
+ * 
+ */
   onFilterUser() {
 
-
-
-    if (this.condition !== "all" && this.condition !== "pending"
-      && this.condition !== "autorizzati" && this.condition !== "arrivati" && this.search !== "") {
+    // qrCode pars
+    if (this.userId !== "") {
       return this.users.filter(u => {
-        return u.nome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.nome.toLowerCase().startsWith(this.search.trim().toLowerCase())
-          || u.cognome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.cognome.toLowerCase().startsWith(this.search.trim().toLowerCase())
+        return u._id === this.userId
       })
     }
 
+// Se ho iniziato a scrivere
+    if (this.search !== "") {
+      // ricerca solo in pending
+      if(this.condition === "pending"){
+        return this.users.filter(u => {
+          return   u.autorizzato === false && (u.nome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.nome.toLowerCase().startsWith(this.search.trim().toLowerCase())
+            || u.cognome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.cognome.toLowerCase().startsWith(this.search.trim().toLowerCase()))
+        })
+      }
+      // ricerca solo in autorizzati
+      else if( this.condition === "autorizzati"){
+        return this.users.filter(u => {
+          return   u.autorizzato === true && (u.nome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.nome.toLowerCase().startsWith(this.search.trim().toLowerCase())
+            || u.cognome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.cognome.toLowerCase().startsWith(this.search.trim().toLowerCase()))
+        })
+      } 
+      // ricerca solo in arrivati
+      else if(this.condition === "arrivati"){
+        return this.users.filter(u => {
+          return   u.arrivato === true && (u.nome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.nome.toLowerCase().startsWith(this.search.trim().toLowerCase())
+            || u.cognome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.cognome.toLowerCase().startsWith(this.search.trim().toLowerCase()))
+        })
+      }
+      // ricerca in tutti
+      else {
+        return this.users.filter(u => {
+          return u.nome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.nome.toLowerCase().startsWith(this.search.trim().toLowerCase())
+            || u.cognome.trim().toLowerCase() == this.search.trim().toLowerCase() || u.cognome.toLowerCase().startsWith(this.search.trim().toLowerCase())
+        })
+      }
 
-    if (this.condition === "all" || (this.condition !== "pending"
-      && this.condition !== "autorizzati"
-      && this.condition !== "arrivati"))
+    }
+
+
+    if (this.condition === "all")
       return this.users
-
-
 
     if (this.condition === "pending") {
       return this.users.filter(x => {
@@ -160,32 +153,27 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
 
 
 
-
   // Only subscribe from the userService
   ngOnDestroy() {
     this.userSub.unsubscribe()
   }
 
+
+
   onUserAuthorization(user: User) {
-
-
     user.autorizzato = this.form.value.authCheckbox
     this.userService.userUpdateAuth(user)
-
-
     // this.form.value.authCheckbox = true
   }
 
 
   onUserArrived(user: User) {
-
-
     user.arrivato = this.formArrived.value.arrivedCheckbox
     user.autorizzato = null
-
     this.userService.userUpdateAuth(user)
 
-    // this.form.value.authCheckbox = true
+    this.router.navigate(['/admin'])
+
   }
 
 
@@ -197,5 +185,5 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
 
 
 
-
+  
 }

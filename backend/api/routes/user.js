@@ -23,10 +23,11 @@ router.put("/puti", CheckAuth, (req, res, next) => {
 
     const user_ = req.body
 
+    // se sto facendo autorizzazione
     if (user_.autorizzato !== null) {
 
-
-        User.updateOne({ _id: user_._id }, { $set: { "autorizzato": user_.autorizzato } })
+        QRCode.toDataURL("http://192.168.1.119:4200/admin/" + user_._id, function (err, url) {
+        User.updateOne({ _id: user_._id }, { $set: { "autorizzato": user_.autorizzato, "qrCode": url } })
             .then(result => {
 
                 const code = '<img src="' + user_.qrCode + '" alt="" style="width: 125px; height: 125px;">'
@@ -42,9 +43,13 @@ router.put("/puti", CheckAuth, (req, res, next) => {
                 }
 
                 res.status(200).json({ message: 'Update successful' })
+
+            })
+
             })
     }
     else {
+        // se sto facendo arrivato
         User.updateOne({ _id: user_._id }, { $set: { "arrivato": user_.arrivato } })
             .then(result => {
                 res.status(200).json({ message: 'Update successful' })
@@ -58,13 +63,41 @@ router.put("/puti", CheckAuth, (req, res, next) => {
 
 
 
+/**
+ * Aggiorna il campo arrivato 
+ */
+router.get("/setArrived/:id",CheckAuth, (req, res, next) => {
+
+    const user_id = req.params.id
+
+        User.updateOne({ _id: user_id, autorizzato: true}, { $set: { "arrivato": true } })
+            .then(result => {
+                res.status(200).json({ message: 'Utente aggiiornato correttamente!' })
+            })
+            .catch(err => {
+                return res.status(500).json({
+                    message: err
+                })
+            })
+    
+})
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Cancella un utente
  */
 router.delete('/:id', CheckAuth, (req, res, next) => {
     User.deleteOne({ _id: req.params.id }).then(result => {
-        console.log(result)
         res.status(200).json({ message: 'Post deleted' })
     })
 
@@ -101,7 +134,6 @@ router.get('',  (req, res, next) => {
         .sort('autorizzato')
         .then(documents => {
 
-            //  console.log("Documenti \n" + documents)
             res.status(200).json({
                 message: 'Posts fetch succesfully',
                 posts: documents
@@ -124,7 +156,6 @@ router.get('/findme/:email', CheckAuth, (req, res, next) => {
                     message: "Auth failed_user_doent_exsists"
                 })
             }
-            console.log("Cio   \n " + user)
             res.status(200).json({
                 message: 'User fetch succesfully',
                 user: user
@@ -146,8 +177,7 @@ router.post("/signup", (req, res, next) => {
     bcrypt.hash(user_.password, 10)
         .then(hash => {
 
-            QRCode.toDataURL(user_.cf, function (err, url) {
-                console.log(url)
+        
 
                 const user = new User({
                     // _id: new mongoose.Types.ObjectId(),
@@ -158,7 +188,7 @@ router.post("/signup", (req, res, next) => {
                     telefono: user_.telefono,
                     email: user_.email,
                     password: hash,
-                    qrCode: url,
+                    qrCode: null,
                     admin: user_.admin,
                     autorizzato: user_.autorizzato,
                     arrivato: false
@@ -166,7 +196,6 @@ router.post("/signup", (req, res, next) => {
 
                 user.save()
                     .then(result => {
-                        console.log("Il ri -******* " + result)
                         res.status(201).json({
                             message: "User created",
                             result: result
@@ -184,7 +213,7 @@ router.post("/signup", (req, res, next) => {
                             error: err
                         })
                     })
-            })
+         
 
         })
 
@@ -252,7 +281,6 @@ router.delete('/delete_all', (req, res, next) => {
             res.status(200).json(result)
         })
         .catch(err => {
-            // console.log(err)
             res.status(500).json({
                 error: err
             })

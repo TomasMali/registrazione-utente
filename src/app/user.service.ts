@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { AuthData } from './login/login-data';
 import { JsonPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class UserService {
   private isAuthenticated = false
   private tokenTimer: any
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public router: Router) { }
 
   getIsAuth() {
     return this.isAuthenticated
@@ -81,8 +82,6 @@ export class UserService {
 
     this.http.post<any>(this.urlUser + "signup", user)
       .subscribe(resultData => {
-        console.log("Broswer ******* " + resultData.result._id)
-
         const user_ = {
           _id: resultData.result._id,
           nome: resultData.result.nome,
@@ -125,8 +124,6 @@ export class UserService {
     this.http.get<{ message: string, user: User }>(this.urlUser + "findme/" + email)
 
       .subscribe(resultData => {
-        console.log("Broswer ******* " + JSON.stringify(resultData.user))
-
         this.currentUser = resultData.user
         var cloneUser: User = { ...this.currentUser }
         this.userUpdated.next(cloneUser)
@@ -145,7 +142,6 @@ export class UserService {
     this.http.get<{ message: string, posts: any }>(this.urlUser)
       .pipe(map((userData) => {
         return userData.posts.map(user => {
-          console.log("Telebingo:    " + user.nome)
           return {
             _id: user._id,
             nome: user.nome,
@@ -163,12 +159,8 @@ export class UserService {
         })
       }))
       .subscribe(resultData => {
-
-        console.log("Broswer ******* " + resultData)
-
         this.users = resultData
         this.usersUpdated.next([...this.users])
-
       })
   }
 
@@ -205,6 +197,8 @@ export class UserService {
         this.userUpdated.next(cloneUser)
         //
         this.getUsers()
+
+
       })
 
   }
