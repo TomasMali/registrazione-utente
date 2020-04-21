@@ -19,6 +19,8 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
   private userSub: Subscription
   today = new Date()
 
+  body_expand: boolean = true
+
   // flag: any;
   search: string = ""
   condition: string = "all"
@@ -87,6 +89,7 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // qrCode pars
     if (this.userId !== "") {
+      this.body_expand = false
       return this.users.filter(u => {
         return u._id === this.userId
       })
@@ -185,5 +188,5 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
 
 
 
-  
+
 }

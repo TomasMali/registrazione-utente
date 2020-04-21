@@ -72,11 +72,6 @@ border-bottom: 3px solid white;
 
 
 
-p::first-letter{
-    color: tomato;
-    font-size: 22px;
-}
-
 .main-nav__item-cta a{
    color: white;
    background-color: #ff1b68;

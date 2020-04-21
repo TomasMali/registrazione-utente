@@ -83,10 +83,6 @@ border-bottom: 3px solid white;
 
 
 
-p::first-letter{
-    color: tomato;
-    font-size: 22px;
-}
 
 .main-nav__item-cta a{
    color: white;
@@ -137,7 +133,13 @@ NAVBAR
 NAVBAR
 */
 
-
+.just_apply{
+    color: springgreen;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 5px solid springgreen;
+ 
+}
 
 
 /*
@@ -148,7 +150,7 @@ ICON MENU
   .icon-bar {
 	width: 22px; 
 	height: 2px;
-	background-color: springgreen;
+	background-color: white;
 	display: block;
 	transition: all 0.2s;
 	margin-top: 4px
