@@ -1,9 +1,17 @@
 
-
+.title_text_color{
+    color: #1C4071;
+}
 
 
 .colorbody{
     background-color: beige;
+}
+
+
+.header_register {
+color: springgreen;
+    background-color: #1C4071;
 }
 
 
