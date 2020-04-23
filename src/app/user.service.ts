@@ -15,7 +15,7 @@ export class UserService {
     throw new Error("Method not implemented.");
   }
 
-  urlUser = "http://192.168.1.119:3000/user/"
+  urlUser = "http://192.168.1.110:3000/user/"
 
   private users: User[] = []
   private usersUpdated = new Subject<User[]>()
