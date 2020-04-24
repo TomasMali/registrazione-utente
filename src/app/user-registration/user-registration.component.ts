@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators , ValidatorFn, ValidationErrors  } from '@angular/forms';
 import { User } from './user.model';
 import { UserService } from '../user.service';
 import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-user-registration',
@@ -37,11 +38,11 @@ export class UserRegistrationComponent implements OnInit, OnDestroy {
       }),
       //
       'cf': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required,  Validators.minLength(16), Validators.maxLength(16),]
       }),
       //
       'eta': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required ,Validators.min(18)]
       }),
       //
       'telefono': new FormControl(null, {
@@ -53,7 +54,7 @@ export class UserRegistrationComponent implements OnInit, OnDestroy {
       }),
       //
       'nuovaPassword': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required,  Validators.minLength(6),]
       }),
       //
       'password': new FormControl(null, {
@@ -97,7 +98,6 @@ export class UserRegistrationComponent implements OnInit, OnDestroy {
   onUserRegistration() {
 
     if (!this.form.valid) {
-      console.log("TUTTO INVALID")
       return
     }
 
@@ -109,7 +109,7 @@ export class UserRegistrationComponent implements OnInit, OnDestroy {
       _id: null,
       nome: formValue.nome,
       cognome: formValue.cognome,
-      cf: formValue.cf,
+      cf: formValue.cf.toUpperCase(),
       eta: formValue.eta,
       telefono: formValue.telefono,
       email: formValue.email,
@@ -124,5 +124,18 @@ export class UserRegistrationComponent implements OnInit, OnDestroy {
 
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

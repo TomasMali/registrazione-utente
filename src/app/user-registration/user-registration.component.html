@@ -11,8 +11,6 @@
   <div class="row p-md-5 p-0 mt-2">
     <div class="col">
 
-
-
       <div class="card  colorbody">
         <div class="card-header text-center header_register   ">Register</div>
         <div class="card-body card_head colorbody p-4">
@@ -66,8 +64,8 @@
                 <input type="text" class="form-control form-control-sm rounded_border_all" placeholder="Il tuo C.F" formControlName="cf"
                   >
               </div>
-              <small *ngIf="form.get('cf').invalid && (form.get('cf').dirty || form.get('cf').touched)"
-                class="ml-5 form-text text-danger">Campo obbligatorio *</small>
+              <small *ngIf="(form.get('cf').invalid && ( form.get('cf').touched))"
+                class="ml-5 form-text text-danger">Valore non corretto *</small>
             </div>
 
 
@@ -85,7 +83,7 @@
                   formControlName="eta">
               </div>
               <small *ngIf="form.get('eta').invalid && (form.get('eta').dirty || form.get('eta').touched)"
-                class="ml-5 form-text text-danger">Campo obbligatorio *</small>
+                class="ml-5 form-text text-danger">Età minore di 18 *</small>
             </div>
 
             <div class="form-group">
@@ -137,7 +135,7 @@
               </div>
               <small
                 *ngIf="form.get('nuovaPassword').invalid && (form.get('nuovaPassword').dirty || form.get('nuovaPassword').touched)"
-                class="ml-5 form-text text-danger">Campo obbligatorio *</small>
+                class="ml-5 form-text text-danger">Inserire almeno 6 caratteri *</small>
             </div>
 
 
@@ -186,7 +184,7 @@
     <div class="col ">
 
 
-      <div class="card ">
+      <div class="card mt-3 mt-md-0">
         <div class="card-header  text-center header_register ">Area Informazioni</div>
         <div class="card-body colorbody ">
 

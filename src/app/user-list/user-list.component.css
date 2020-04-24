@@ -27,9 +27,13 @@ border-width: 2px;
 }
 
 
-h5{
-  font-size: 0.9em;
-}  
+@media (max-width: 390px) {
+  h5{
+    font-size: 0.9em;
+  }  
+}
+
+
 
 
 .apply_collapse {

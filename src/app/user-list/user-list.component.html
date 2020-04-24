@@ -27,23 +27,27 @@
           <div class="col px-0 mx-0">
 
             <div class="form-check-inline">
-              <label class="form-check-label" for="radio4">
-                <input type="radio" class="form-check-input with-gap" (click)="onCheckBoxSearAll()">All
+              <label class="form-check-label" for="radio0">
+                <input type="radio" class="form-check-input with-gap" name="1" id="1" [value]="0" [(ngModel)]="flag"
+                 (click)="onCheckBoxSearAll()">All
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label" for="radio1">
-                <input type="radio" class="form-check-input with-gap" (click)="onCheckBoxSearPending()">Pending
+                <input type="radio" class="form-check-input with-gap" name="2" id="2" [value]="1" [(ngModel)]="flag" 
+                 (click)="onCheckBoxSearPending()">Pending
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label" for="radio2">
-                <input type="radio" class="form-check-input with-gap" (click)="onCheckBoxSearchAutorizzati()">Autoriz
+                <input type="radio" class="form-check-input with-gap" name="3" id="3" [value]="2" [(ngModel)]="flag" 
+                (click)="onCheckBoxSearchAutorizzati()">Autoriz
               </label>
             </div>
             <div class="form-check-inline" for="radio3">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input with-gap" (click)="onCheckBoxSearchArrivati()">Arrivati
+                <input type="radio" class="form-check-input with-gap"  name="4" id="4" [value]="3" [(ngModel)]="flag" 
+                (click)="onCheckBoxSearchArrivati()">Arrivati
               </label>
             </div>
 
@@ -58,10 +62,10 @@
 
       <div [ngClass]="{'apply_collapse': users.length > 8}">
 
-        <div class="card p-0 " *ngFor="let user of onFilterUser(); let i = index" >
+        <div class="card p-0 " *ngFor="let user of onFilterUser(); let i = index">
 
 
-          <a class="p-2  colore_header" data-toggle="collapse" href="#List-{{ i }}" aria-expanded="false" >
+          <a class="p-2  colore_header" data-toggle="collapse" href="#List-{{ i }}" aria-expanded="false">
 
             <div class="row">
               <div class="col col-10 col-md-11 text-center pl-5">
@@ -88,36 +92,32 @@
           </a>
 
 
-          <div id="List-{{ i }}"   [ngClass]="{'collapse': body_expand }">
+          <div id="List-{{ i }}" [ngClass]="{'collapse': body_expand }">
             <div class="card-body">
 
 
-              <div class="row">
+              <div class="row ">
+
+                <div class="col col-0 col-md-3">
+
+                </div>
+
                 <div class="col ">
                   <img src="{{user?.qrCode}}" alt="" style="width: 125px; height: 125px;">
-
-                </div>
-                <div class="col mt-3 ">
-                  <h5> <small> <strong> C.F: </strong> {{user?.cf}} </small> </h5>
-                  <h5> <small> <strong> E-mail: </strong> {{user?.email}} </small> </h5>
-                  <h5> <small> <strong> Telefono: </strong> {{user?.telefono}} </small> </h5>
-                  <h5> <small> <strong> Età: </strong> {{user?.eta}} </small> </h5>
                 </div>
 
 
-                <div class="col">
 
-                  <form [formGroup]="form" (change)="onUserAuthorization(user)">
+                <div class="col mt-5">
+                  <form [formGroup]="form" (change)="onUserAuthorization(user)" class="mb-3">
                     <div class="form-check">
                       <input class="form-check-input" [checked]="user?.autorizzato" formControlName="authCheckbox"
                         type="checkbox">
                       <label class="form-check-label" for="defaultCheck1">
-                        Utente autorizzato
+                        Autorizzato
                       </label>
                     </div>
                   </form>
-
-
 
                   <form [formGroup]="formArrived" (change)="onUserArrived(user)">
                     <div class="form-check" *ngIf="user?.autorizzato">
@@ -129,17 +129,42 @@
                     </div>
                   </form>
 
-                  <button class="btn btn-sm btn-danger rounded_border_all btn-rounded   my-3" type="submit"
-                    (click)="onDeleteUser(user?._id)">
-                    Delete user
-                  </button>
+                </div>
 
+              </div>
 
+              <div class="row ">
+
+                <div class="col col-0 col-md-3">
 
                 </div>
 
 
+
+                <div class="col   mt-3 ">
+                  <h5> <small> <strong> C.F: </strong> {{user?.cf}} </small> </h5>
+                  <h5> <small> <strong> E-mail: </strong> {{user?.email}} </small> </h5>
+                  <h5> <small> <strong> Telefono: </strong> {{user?.telefono}} </small> </h5>
+                  <h5> <small> <strong> Età: </strong> {{user?.eta}} </small> </h5>
+                </div>
+
+
+
+
+
+                <div class="col mt-5">
+
+                  <button class="btn btn-sm btn-danger rounded_border_all btn-rounded my-3" type="submit"
+                    (click)="onDeleteUser(user?._id)">
+                    Delete user
+                  </button>
+                </div>
+
               </div>
+
+
+
+
 
 
             </div>

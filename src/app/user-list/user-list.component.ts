@@ -25,8 +25,10 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
   search: string = ""
   condition: string = "all"
   userId: string = ""
+  flag: string;
 
-  constructor(public userService: UserService, private cdRef: ChangeDetectorRef, public route: ActivatedRoute, public router: Router) {
+  constructor(public userService: UserService, private cdRef: ChangeDetectorRef,
+     public route: ActivatedRoute, public router: Router) {
   }
 
   ngAfterViewChecked() {
@@ -67,18 +69,30 @@ export class UserListComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   onCheckBoxSearPending() {
     this.condition = "pending"
+    if(this.userId !== ""){
+      this.router.navigate(['/admin'])
+    }
   }
 
   onCheckBoxSearchAutorizzati() {
     this.condition = "autorizzati"
+    if(this.userId !== ""){
+      this.router.navigate(['/admin'])
+    }
   }
 
   onCheckBoxSearchArrivati() {
     this.condition = "arrivati"
+    if(this.userId !== ""){
+      this.router.navigate(['/admin'])
+    }
   }
 
   onCheckBoxSearAll() {
     this.condition = "all"
+    if(this.userId !== ""){
+      this.router.navigate(['/admin'])
+    }
   }
 
 

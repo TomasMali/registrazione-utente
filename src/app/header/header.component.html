@@ -14,13 +14,13 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto ">
-      <li class="nav-item mt-1 mt-md-0 mx-md-3   active"  data-toggle="collapse" data-target=".navbar-collapse.show" *ngIf="userIsAuthenticated">
+      <li class="nav-item mt-1 mt-md-0   active"  data-toggle="collapse" data-target=".navbar-collapse.show" *ngIf="userIsAuthenticated">
         <a class="nav-link pl-5 pt-3 pb-3 p-md-5"  routerLink="/myaccount" routerLinkActive="just_apply">MyArea</a>
       </li>
-      <li class=" nav-item mt-1 mt-md-0 mx-md-3  active"  data-toggle="collapse" data-target=".navbar-collapse.show" *ngIf="userIsAuthenticated && userIsAdmin">
+      <li class=" nav-item mt-1 mt-md-0   active"  data-toggle="collapse" data-target=".navbar-collapse.show" *ngIf="userIsAuthenticated && userIsAdmin">
         <a class="nav-link pl-5 pt-3 pb-3  p-md-5"  routerLink="/admin" routerLinkActive="just_apply">Admin</a>
       </li>
-      <li class="nav-item mt-1 mt-md-0  mx-md-3  active" data-toggle="collapse" data-target=".navbar-collapse.show" *ngIf="!userIsAuthenticated">
+      <li class="nav-item mt-1 mt-md-0    active" data-toggle="collapse" data-target=".navbar-collapse.show" *ngIf="!userIsAuthenticated">
         <a class="nav-link pl-5 pt-3 pb-3 p-md-5"   routerLink="/registrati" routerLinkActive="just_apply">Register</a>
       </li>
       <li class="nav-item mt-1 ml-3  mt-md-0 ml-md-3 mr-md-5  active"  data-toggle="collapse" data-target=".navbar-collapse.show" *ngIf="!userIsAuthenticated">
