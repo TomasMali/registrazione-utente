@@ -15,7 +15,7 @@ export class UserService {
     throw new Error("Method not implemented.");
   }
 
-  urlUser = "http://192.168.1.110:3000/user/"
+  urlUser = "https://registrazione.herokuapp.com/user/"
 
   private users: User[] = []
   private usersUpdated = new Subject<User[]>()
